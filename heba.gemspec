@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'heba/version'
+require 'eve/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "heba"
-  spec.version       = Heba::VERSION
+  spec.name          = "eve"
+  spec.version       = Eve::VERSION
   spec.authors       = ["Ahmad A.Elghany"]
   spec.email         = ["tolpa1@gmail.com"]
 
-  spec.summary       = %q{Heba will help you manage your workflow easily and on time}
+  spec.summary       = %q{Eve will help you manage your workflow easily and on time}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
