@@ -1,10 +1,9 @@
-# Helper module for authentication token actions
 module Eve
+  # Helper module for authentication token actions
   module AuthTokenFile
     class << self
-
       def filename
-        File.expand_path "~/.eve"
+        File.expand_path '~/.eve'
       end
 
       def read
@@ -12,11 +11,10 @@ module Eve
       end
 
       def write(token)
-        File.open(filename, "w", 0600) do |f|
+        File.open(filename, 'w', 0600) do |f|
           f.write token
         end
       end
-
     end
   end
 end
