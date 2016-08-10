@@ -3,17 +3,25 @@ require 'eve/connection'
 
 # The Secretary
 module Eve
-  def constructor
-    puts '--Eve needs to know who you are!'
-    return if auth_token
+  include Connection
 
-    Connection.new(setup)
+  def self.prepare
+    if auth_token
+      @client = Connection.start(auth_token)
+      puts "hey #{@client.login}, Welcome Back!"
+    else
+      Connection.initiate(interface)
+      prepare
+    end
   end
 
-  def setup
+  private
+
+  def interface
+    puts '-- Eve needs to recognize you'
     puts 'Please enter Github username:'
     username = $stdin.gets.strip
-    puts 'Github password'
+    puts 'and your Github password'
     password = begin
       `stty -echo` rescue nil
       $stdin.gets.strip
