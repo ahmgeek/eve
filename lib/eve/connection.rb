@@ -5,31 +5,38 @@ module Eve
   class Connection
     attr_reader :github, :asana
 
+    # TODO(ahmgeek): Better error handling
+    # if tokens are not set.
     def initialize
       if auth_tokens_exists?
         connect
-      elsif auth_tokens[:github].nil?
+      elsif auth_token[:github].nil?
         Eve::Adapter::Github.initiate(interface)
+        connect
+      elsif auth_token[:asana].nil?
+        error_message = <<-HEREDOC
+-- Eve couldn't find Asana's token file,
+- Please follow the inestructions at the
+- README to know how to create one
+        HEREDOC
+        puts error_message
+      else
         connect
       end
     end
 
     def connect
-      begin
-        @github = Eve::Adapter::Github.start(auth_token[:github])
-        @asana  = Eve::Adapter::Asana.start(auth_token[:asana])
-      rescue => e
-       puts e.message
-      end
+      @github = Eve::Adapter::Github.start(auth_token[:github])
+      @asana  = Eve::Adapter::Asana.start(auth_token[:asana])
     end
 
     def interface
       welcome_message = <<-HEREDOC
-      -- Eve needs to recognize you
-      --------------------------------------------
-      - For Asana authentication, get back README 
-      - #Asana section and follow instructions.
-      --------------------------------------------
+-- Eve needs to recognize you
+--------------------------------------------
+- For Asana authentication, get back README 
+- #Asana section and follow instructions.
+--------------------------------------------
       HEREDOC
 
       puts welcome_message
@@ -55,8 +62,8 @@ module Eve
     end
 
     def auth_token
-      gh_token  = Eve::AuthTokenFile.read_gh_token rescue nil
-      as_token  = Eve::AuthTokenFile.read_as_token rescue nil
+      gh_token  = Eve::AuthTokenFile.read_gh_token
+      as_token  = Eve::AuthTokenFile.read_as_token
 
       return { github: gh_token, asana: as_token }
 _  end

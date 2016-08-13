@@ -12,11 +12,11 @@ module Eve
       end
 
       def read_gh_token
-        File.read(github_token).chomp
+        File.read(github_token).chomp rescue nil
       end
 
       def read_as_token
-        File.read(asana_token).chomp
+        File.read(asana_token).chomp rescue nil
       end
 
       def write(token)
