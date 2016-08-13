@@ -1,7 +1,9 @@
 require 'eve/version'
+require 'eve/auth_token_file'
+require 'eve/connection'
 
 module Eve
   def self.start
-    Eve::CLI.prepare
+    @connection = Connection.new
   end
 end

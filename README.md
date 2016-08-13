@@ -22,6 +22,22 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+
+### Asana
+Asana client doesn't produce the token for us like GH, so, basically head to Asana web app 
+* then profile settings
+* apps
+* `manage developer apps` at the bottom of the pop-up
+* at `PERSONAL ACCESS TOKENS` section press: Create New Personal Access Token 
+* type: "Eve".
+* Press create.
+
+Copy your token and save it in your preferable thingy.
+
+Head to your shell and paste this command and runt it, `HINT` replace `<token>` with Asana Token:
+
+`$echo "<token>" > ~/.eve_as`
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

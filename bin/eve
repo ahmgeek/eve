@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'eve'
-require 'eve/cli'
 
-Eve.start
+Eve::start
