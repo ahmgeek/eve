@@ -21,6 +21,7 @@ module Eve
           - README to know how to create one
         USAGE
         puts error_message
+        exit false
       else
         connect
       end
