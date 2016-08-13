@@ -1,5 +1,6 @@
 require 'eve/adapters/as_adapter'
 require 'eve/adapters/gh_adapter'
+require 'eve/helpers/string_striper'
 
 module Eve
   class Connection
@@ -14,11 +15,11 @@ module Eve
         Eve::Adapter::Github.initiate(interface)
         connect
       elsif auth_token[:asana].nil?
-        error_message = <<-HEREDOC
--- Eve couldn't find Asana's token file,
-- Please follow the inestructions at the
-- README to know how to create one
-        HEREDOC
+        error_message = <<-USAGE.strip_heredoc
+          -- Eve couldn't find Asana's token file,
+          - Please follow the inestructions at the
+          - README to know how to create one
+        USAGE
         puts error_message
       else
         connect
@@ -31,13 +32,13 @@ module Eve
     end
 
     def interface
-      welcome_message = <<-HEREDOC
--- Eve needs to recognize you
---------------------------------------------
-- For Asana authentication, get back README 
-- #Asana section and follow instructions.
---------------------------------------------
-      HEREDOC
+      welcome_message = <<-USAGE.strip_heredoc
+        -- Eve needs to recognize you
+        --------------------------------------------
+        - For Asana authentication, get back README 
+        - #Asana section and follow instructions.
+        --------------------------------------------
+      USAGE
 
       puts welcome_message
 
