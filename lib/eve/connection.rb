@@ -66,6 +66,6 @@ module Eve
       as_token  = Eve::AuthTokenFile.read_as_token
 
       return { github: gh_token, asana: as_token }
-_  end
+    end
   end
 end
